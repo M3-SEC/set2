@@ -1,5 +1,6 @@
 #!/bin/bash
 
+chmod +x set.sh
 mkdir tools
 cd tools
 sudo apt-get install python-dev python-pip libncurses5-dev git
@@ -19,3 +20,4 @@ git clone https://github.com/M3-SEC/spoofmail.git
 cd spoofmail
 chmod +x spoofmail.sh
 cd ..
+

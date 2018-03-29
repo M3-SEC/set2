@@ -5,10 +5,11 @@ echo "                  ███████╗███████╗██�
 echo "                  ██╔════╝██╔════╝╚══██╔══╝";
 echo "                  ███████╗█████╗     ██║   ";
 echo "                  ╚════██║██╔══╝     ██║   ";
-echo "                  ███████║███████╗   ██║   ";
+echo "                  ███████║███████╗   ██║ 2 ";
 echo "                  ╚══════╝╚══════╝   ╚═╝   ";
 echo "                  M3-Sec.        V: 0.01   ";
 echo "     The new Social Engineering toolkit with new tools.";
+echo ""
 echo "1)      QR-Code Attacks"
 echo "2)      Spoofmail"
 echo "3)      Phishing"
