@@ -1,5 +1,5 @@
 # SET2
-This ist the Social Engineering Toolkit 2.
+This is the Social Engineering Toolkit 2.
 
 # Installation
 ```
