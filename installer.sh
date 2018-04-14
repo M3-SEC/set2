@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo "Please enter your ngrok AUTH-TOKEN :"
+read ngrokauth
 apt-get install lib32stdc++6 lib32ncurses5 lib32z1 -y
 apt-get install zipalign -y
 apt-get install xterm -y
@@ -8,7 +9,7 @@ apt-get autoremove -y
 cd ~/set2/
 chmod +x set2.sh
 mkdir temp
-mv .fud ~/set2/temp
+mv fud ~/set2/temp
 mkdir output
 mkdir tools
 cd ~/set2/tools
@@ -31,9 +32,7 @@ cd ~/set2/tools
 wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
 unzip ngrok-stable-linux-amd64.zip
 rm ngrok-stable-linux-amd64.zip
-
-
-
+./ngrok authtoken $ngrokauth
 
 
 

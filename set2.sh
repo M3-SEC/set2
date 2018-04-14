@@ -69,7 +69,7 @@ elif [[ $menu = 4 ]]; then
         read ngrokport
         cd ..
         cd temp/
-        cat .fud >> output.ps1
+        cat fud >> output.ps1
         echo "" >> output.ps1
         echo "" >> output.ps1
         echo "" >> output.ps1
@@ -116,7 +116,7 @@ elif [[ $menu = 4 ]]; then
         echo "Please enter the PORT :"
         read LPORT
         cd temp/
-        cat .fud >> output.ps1
+        cat fud >> output.ps1
         echo "" >> output.ps1
         echo "" >> output.ps1
         echo "" >> output.ps1        
