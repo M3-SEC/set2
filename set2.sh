@@ -29,25 +29,44 @@ echo "0)      Exit"
 read menu
 if [[ $menu = 1 ]]; then
     cd ~/set2/tools/QrlJacking-Framework
-    gnome-terminal -e python QRLJacker.py &
+    gnome-terminal -e "python QRLJacker.py" &
+    sleep 2
     clear
+    read -p "Press [ENTER] to go back to menu."
+    cd ~/set2/
+    ./set2.sh
 elif [[ $menu = 2 ]]; then
     cd ~/set2/tools/spoofmail
     gnome-terminal -e ./spoofmail.sh &
+    sleep 2
     clear
+    read -p "Press [ENTER] to go back to menu."
+    cd ~/set2/
+    ./set2.sh
 elif [[ $menu = 3 ]]; then
     cd ~/set2/tools/SocialFish
-    gnome-terminal -e python SocialFish.py &
+    gnome-terminal -e "python SocialFish.py" &
+    sleep 2
     clear
     read -p "Press [ENTER] to continue."
     clear
     echo "Do you want to combine it with spoofmail?"
-    echo "[y/n]"
+    echo "1 =   y"
+    echo "2 =   n"
     read menu3
-    if [[ $menu3 = y ]]; then
+    if [[ $menu3 = 1 ]]; then
         cd ~/set2/tools/spoofmail
-        gnome terminal -e ./spoofmail &
+        gnome-terminal -e "./spoofmail" &
+        sleep 2
+        clear
         printf "\033[1m(YOU NEED TO ENTER THE NGORK ADRESS INSIDE THE BODY OF THE EMAIL!)\033[0m"
+        read -p "Press [ENTER] to go back to menu."
+        cd ~/set2/
+        ./set2.sh
+    elif [[ $menu3 = 2 ]]; then
+        cd ~/set2/
+        ./set2.sh
+    fi
 elif [[ $menu = 4 ]]; then
     clear
     echo "Do you want to do it over"

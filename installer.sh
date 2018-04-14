@@ -41,3 +41,4 @@ rm ngrok-stable-linux-amd64.zip
 
 cd
 echo "alias set2='bash ~/set2/set2.sh'" >> .bashrc
+clear
