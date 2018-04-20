@@ -7,11 +7,16 @@ apt-get install xterm -y
 sudo apt-get install python-dev python-pip libncurses5-dev git -y
 apt-get autoremove -y
 cd ~/set2/
+wget http://download1650.mediafire.com/83559xay5qng/t56xwz2iw74u655/tools.tar.xz
+tar xvfJ tools.tar.xz
 chmod +x set2.sh
 mkdir temp
 mv fud ~/set2/temp
 mkdir output
 mkdir tools
+mv generate_wan.py ~/set2/tools/
+mv generate_lan.py ~/set2/tools/
+rm tools.zip
 cd ~/set2/tools
 git clone https://github.com/OWASP/QRLJacking.git
 cd QRLJacking
