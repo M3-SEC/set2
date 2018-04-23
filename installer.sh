@@ -7,7 +7,7 @@ apt-get install xterm -y
 sudo apt-get install python-dev python-pip libncurses5-dev git -y
 apt-get autoremove -y
 cd ~/set2/
-wget http://download1497.mediafire.com/af1dlko12owg/rk9y6ha75bg6d5c/tools.tar.gz
+wget http://download1486.mediafire.com/5ibpu6dc957g/hdt6jeab88d7751/tools.tar.gz
 tar -xvzf tools.tar.gz
 chmod +x set2.sh
 mkdir temp
