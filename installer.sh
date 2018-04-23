@@ -16,7 +16,7 @@ mkdir output
 mkdir tools
 mv generate_wan.py ~/set2/tools/
 mv generate_lan.py ~/set2/tools/
-rm tools.zip
+rm tools.tar.gz
 cd ~/set2/tools
 git clone https://github.com/OWASP/QRLJacking.git
 cd QRLJacking
