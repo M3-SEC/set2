@@ -17,6 +17,7 @@ mkdir tools
 mv generate_wan.py ~/set2/tools/
 mv generate_lan.py ~/set2/tools/
 rm tools.tar.gz
+pip install termcolor
 cd ~/set2/tools
 git clone https://github.com/OWASP/QRLJacking.git
 cd QRLJacking
