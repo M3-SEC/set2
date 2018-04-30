@@ -8,8 +8,8 @@ sudo apt-get install python-dev python-pip libncurses5-dev git -y
 apt-get autoremove -y
 cd ~/set2/
 wget https://github.com/M3-SEC/set2/releases/download/Tools/tools.bin
-mv tools.bin tools.tar.gz
-tar -xvzf tools.tar.gz
+mv tools.bin tools.zip
+unzip tools.zip
 chmod +x set2.sh
 mkdir temp
 mv fud ~/set2/temp
@@ -17,6 +17,7 @@ mkdir output
 mkdir tools
 mv generate_wan.py ~/set2/tools/
 mv generate_lan.py ~/set2/tools/
+mv serveo.sh ~/set2/tools/
 rm tools.tar.gz
 pip install termcolor
 cd ~/set2/tools

