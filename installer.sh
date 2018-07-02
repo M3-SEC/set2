@@ -31,7 +31,7 @@ pip install -r requirements.txt
 cd ~/set2/tools
 git clone https://github.com/UndeadSec/SocialFish.git
 cd SocialFish
-sudo pip install -r requirements.txt
+sudo pip3 install -r requirements.txt
 cd ~/set2/tools
 git clone https://github.com/M3-SEC/spoofmail.git
 cd spoofmail

