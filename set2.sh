@@ -240,10 +240,10 @@ elif [[ $menu = 5 ]]; then
             clear
             ngrokip=$(resolveip -s ngrok.com)
             cd tools/
-            xterm -e ./ngrok http 3000 &
+            #xterm -e ./ngrok http 3000 &
             sleep 2
-            echo "Please enter that Port that ngrok gives you [0.tcp.ngrok.io:xxxx]  "
-            read ngrokport
+            #echo "Please enter that Port that ngrok gives you [0.tcp.ngrok.io:xxxx]  "
+            #read ngrokport
             sleep 2
             bash serveo.sh &
             sleep 2
