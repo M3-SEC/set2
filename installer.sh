@@ -6,37 +6,37 @@ apt-get install zipalign -y
 apt-get install xterm -y
 sudo apt-get install python-dev python-pip libncurses5-dev git -y
 apt-get autoremove -y
-cd ~/set2/
 wget https://github.com/M3-SEC/set2/releases/download/Tools/tools.bin
 mv tools.bin tools.zip
 unzip tools.zip
 chmod +x set2.sh
 mkdir temp
-mv fud ~/set2/temp
+mv fud temp/
 mkdir output
 mkdir tools
-mv generate_wan.py ~/set2/tools/
-mv generate_lan.py ~/set2/tools/
-mv serveo.sh ~/set2/tools/
+mv generate_wan.py tools/
+mv generate_lan.py tools/
+mv serveo.sh tools/
+mv hook.js tools/
 rm tools.zip
 pip install termcolor
-cd ~/set2/tools
+cd tools/
 git clone https://github.com/OWASP/QRLJacking.git
 cd QRLJacking
-mv QrlJacking-Framework ~/set2/tools
-cd ~/set2/tools
+mv QrlJacking-Framework ..
+cd ..
 rm -rf QRLJacking
 cd QrlJacking-Framework
 pip install -r requirements.txt
-cd ~/set2/tools
+cd ..
 git clone https://github.com/UndeadSec/SocialFish.git
 cd SocialFish
 sudo pip3 install -r requirements.txt
-cd ~/set2/tools
+cd ..
 git clone https://github.com/M3-SEC/spoofmail.git
 cd spoofmail
 chmod +x spoofmail.sh
-cd ~/set2/tools
+cd ..
 wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
 unzip ngrok-stable-linux-amd64.zip
 rm ngrok-stable-linux-amd64.zip
